@@ -1,0 +1,24 @@
+services:
+  neo4j:
+    image: 'neo4j:5'
+    ports:
+      - '7474'
+      - '7687'
+    environment:
+      NEO4J_AUTH: 'neo4j/password'
+  zipkin:
+    image: 'openzipkin/zipkin:latest'
+    ports:
+      - '9411'
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - '9090'
+    volumes:
+      - ./etc/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '3000'
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
